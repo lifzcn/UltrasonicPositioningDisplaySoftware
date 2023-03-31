@@ -1,0 +1,2 @@
+# UltrasonicPositioningDisplaySoftware
+ 基于Python和PyQT5开发的超声波检测的目标定位系统
