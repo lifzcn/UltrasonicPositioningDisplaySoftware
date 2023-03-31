@@ -10,20 +10,26 @@
 
 import sys
 import time
-from PyQt5.QtCore import QTimer
+from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtSerialPort import QSerialPort, QSerialPortInfo
-from PyQt5.QtWidgets import QApplication, QMainWindow
-from PyQt5.QtChart import QChart, QValueAxis, QChartView, QSplineSeries
 from interface import Ui_Form
+import numpy as np
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
+from matplotlib.figure import Figure
+
+targetAngle = 0
+targetDistance = 0
 
 
 class mainWindow(QMainWindow, Ui_Form):
+
     def __init__(self, parent=None):
         super(mainWindow, self).__init__(parent)
         self.setupUi(self)
         self.createItems()
         self.createSignalSlot()
+        self.systemInterface()
 
     def createItems(self):
         self.com = QSerialPort()
@@ -44,6 +50,9 @@ class mainWindow(QMainWindow, Ui_Form):
         try:
             rxData = bytes(self.com.readAll())
             self.lineEdit_TargetPosition.setText(rxData.decode("utf-8"))
+            rxDataList = rxData.decode("utf-8").split(',')
+            targetAngle = rxDataList[0]
+            targetDistance = rxDataList[1]
         except:
             QMessageBox.critical(self, "严重错误", "串口接收数据错误!")
 
@@ -89,7 +98,14 @@ class mainWindow(QMainWindow, Ui_Form):
         sys.exit(app.exec_())
 
     def systemInterface(self):
-        pass
+        figInit = Figure(figsize=(4, 3), dpi=100)
+        self.canvas = FigureCanvas(figInit)
+        self.canvas.setParent(self.graphicsView_SystemDisplay)
+        figInit.add_subplot(111, polar=True).scatter(targetAngle, targetDistance, color='r')
+        scene = QGraphicsScene(self)
+        scene.addWidget(self.canvas)
+        self.graphicsView_SystemDisplay.setScene(scene)
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

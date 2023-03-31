@@ -7,8 +7,20 @@
     <x>0</x>
     <y>0</y>
     <width>480</width>
-    <height>640</height>
+    <height>680</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>480</width>
+    <height>680</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>480</width>
+    <height>680</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>Form</string>
@@ -28,7 +40,7 @@
    <widget class="QPushButton" name="pushButton_UpdateSerialPort">
     <property name="geometry">
      <rect>
-      <x>200</x>
+      <x>210</x>
       <y>30</y>
       <width>93</width>
       <height>61</height>
@@ -41,7 +53,7 @@
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>30</x>
+      <x>20</x>
       <y>20</y>
       <width>141</width>
       <height>81</height>
@@ -84,7 +96,7 @@
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>320</x>
+      <x>330</x>
       <y>20</y>
       <width>95</width>
       <height>81</height>
@@ -114,7 +126,7 @@
      <x>19</x>
      <y>199</y>
      <width>441</width>
-     <height>361</height>
+     <height>401</height>
     </rect>
    </property>
    <property name="title">
@@ -124,7 +136,7 @@
     <property name="geometry">
      <rect>
       <x>290</x>
-      <y>320</y>
+      <y>360</y>
       <width>141</width>
       <height>31</height>
      </rect>
@@ -134,7 +146,7 @@
     <property name="geometry">
      <rect>
       <x>220</x>
-      <y>330</y>
+      <y>370</y>
       <width>60</width>
       <height>16</height>
      </rect>
@@ -143,13 +155,13 @@
      <string>目标位置</string>
     </property>
    </widget>
-   <widget class="QChartView" name="graphicsView_SystemDisplay">
+   <widget class="QGraphicsView" name="graphicsView_SystemDisplay">
     <property name="geometry">
      <rect>
       <x>10</x>
       <y>30</y>
       <width>421</width>
-      <height>281</height>
+      <height>321</height>
      </rect>
     </property>
    </widget>
@@ -175,8 +187,8 @@
   <widget class="QGroupBox" name="groupBox_3">
    <property name="geometry">
     <rect>
-     <x>19</x>
-     <y>570</y>
+     <x>20</x>
+     <y>610</y>
      <width>441</width>
      <height>61</height>
     </rect>
@@ -188,7 +200,7 @@
     <property name="geometry">
      <rect>
       <x>280</x>
-      <y>29</y>
+      <y>30</y>
       <width>151</width>
       <height>21</height>
      </rect>
@@ -201,7 +213,7 @@
     <property name="geometry">
      <rect>
       <x>90</x>
-      <y>29</y>
+      <y>30</y>
       <width>91</width>
       <height>21</height>
      </rect>
@@ -214,7 +226,7 @@
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>30</y>
+      <y>31</y>
       <width>72</width>
       <height>15</height>
      </rect>
@@ -227,7 +239,7 @@
     <property name="geometry">
      <rect>
       <x>200</x>
-      <y>30</y>
+      <y>31</y>
       <width>72</width>
       <height>15</height>
      </rect>
@@ -238,13 +250,6 @@
    </widget>
   </widget>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>QChartView</class>
-   <extends>QGraphicsView</extends>
-   <header location="global">PyQt5.QtChart</header>
-  </customwidget>
- </customwidgets>
  <resources/>
  <connections/>
 </ui>
