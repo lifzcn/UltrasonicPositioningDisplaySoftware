@@ -14,6 +14,7 @@ from PyQt5.QtCore import QTimer
 from PyQt5.QtWidgets import *
 from PyQt5.QtSerialPort import QSerialPort, QSerialPortInfo
 from PyQt5.QtWidgets import QApplication, QMainWindow
+from PyQt5.QtChart import QChart, QValueAxis, QChartView, QSplineSeries
 from interface import Ui_Form
 
 
@@ -87,6 +88,8 @@ class mainWindow(QMainWindow, Ui_Form):
     def close(self):
         sys.exit(app.exec_())
 
+    def systemInterface(self):
+        pass
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

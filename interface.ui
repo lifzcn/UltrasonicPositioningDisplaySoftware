@@ -143,6 +143,16 @@
      <string>目标位置</string>
     </property>
    </widget>
+   <widget class="QChartView" name="graphicsView_SystemDisplay">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>30</y>
+      <width>421</width>
+      <height>281</height>
+     </rect>
+    </property>
+   </widget>
   </widget>
   <widget class="QLabel" name="label_1">
    <property name="geometry">
@@ -228,6 +238,13 @@
    </widget>
   </widget>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QChartView</class>
+   <extends>QGraphicsView</extends>
+   <header location="global">PyQt5.QtChart</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
