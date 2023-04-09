@@ -106,6 +106,7 @@ class Ui_Form(object):
         self.pushButton_Open.setText(_translate("Form", "打开"))
         self.pushButton_Close.setText(_translate("Form", "关闭"))
         self.groupBox_2.setTitle(_translate("Form", "定位显示"))
+        self.lineEdit_TargetPosition.setText(_translate("Form", "0,0"))
         self.label_6.setText(_translate("Form", "目标位置"))
         self.label_1.setText(_translate("Form", "基于超声波检测的目标定位系统"))
         self.groupBox_3.setTitle(_translate("Form", "状态栏"))

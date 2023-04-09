@@ -20,6 +20,7 @@ from matplotlib.figure import Figure
 
 targetAngle = 0
 targetDistance = 0
+infoList = "0,0"
 
 
 class mainWindow(QMainWindow, Ui_Form):
@@ -50,11 +51,9 @@ class mainWindow(QMainWindow, Ui_Form):
         try:
             rxData = bytes(self.com.readAll())
             self.lineEdit_TargetPosition.setText(rxData.decode("utf-8"))
-            rxDataList = rxData.decode("utf-8").split(',')
-            targetAngle = rxDataList[0]
-            targetDistance = rxDataList[1]
         except:
             QMessageBox.critical(self, "严重错误", "串口接收数据错误!")
+        return targetAngle
 
     def comRefresh(self):
         self.comboBox_SerialPortName.clear()
@@ -98,6 +97,10 @@ class mainWindow(QMainWindow, Ui_Form):
         sys.exit(app.exec_())
 
     def systemInterface(self):
+        infoList = self.lineEdit_TargetPosition.text().split(',')
+        targetAngle = int(infoList[0])
+        targetDistance = int(infoList[1])
+        print(targetAngle)
         figInit = Figure(figsize=(4, 3), dpi=100)
         self.canvas = FigureCanvas(figInit)
         self.canvas.setParent(self.graphicsView_SystemDisplay)
