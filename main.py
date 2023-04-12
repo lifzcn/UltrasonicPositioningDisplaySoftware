@@ -50,7 +50,17 @@ class mainWindow(QMainWindow, Ui_Form):
             infoList = rxData.decode("utf-8").split(',')
             targetAngle = int(infoList[0])
             targetDistance = int(infoList[1])
-            self.lineEdit_TargetPosition.setText(infoList[0] + '°' + ',' + infoList[1] + 'm')
+            if targetAngle >= 0 and targetAngle < 45:
+                self.lineEdit_TargetPosition.setText("E→N:" + str(targetAngle) + '°' + ',' + str(targetDistance) + 'm')
+            elif targetAngle >= 45 and targetAngle < 90:
+                self.lineEdit_TargetPosition.setText(
+                    "N→E:" + str(90 - targetAngle) + '°' + ',' + str(targetDistance) + 'm')
+            elif targetAngle >= 90 and targetAngle < 135:
+                self.lineEdit_TargetPosition.setText(
+                    "N→W:" + str(135 - targetAngle) + '°' + ',' + str(targetDistance) + 'm')
+            else:
+                self.lineEdit_TargetPosition.setText(
+                    "W→N:" + str(180 - targetAngle) + '°' + ',' + str(targetDistance) + 'm')
             self.updateDisplay(targetAngle, targetDistance)
         except Exception as e:
             QMessageBox.critical(self, "严重错误", "串口接收数据错误!\n" + str(e))
