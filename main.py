@@ -18,10 +18,6 @@ import numpy as np
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
 
-targetAngle = 0
-targetDistance = 0
-infoList = "0,0"
-
 
 class mainWindow(QMainWindow, Ui_Form):
 
@@ -51,9 +47,12 @@ class mainWindow(QMainWindow, Ui_Form):
         try:
             rxData = bytes(self.com.readAll())
             self.lineEdit_TargetPosition.setText(rxData.decode("utf-8"))
-        except:
-            QMessageBox.critical(self, "严重错误", "串口接收数据错误!")
-        return targetAngle
+            infoList = self.lineEdit_TargetPosition.text().split(',')
+            targetAngle = int(infoList[0])
+            targetDistance = int(infoList[1])
+            self.updateDisplay(targetAngle, targetDistance)
+        except Exception as e:
+            QMessageBox.critical(self, "严重错误", "串口接收数据错误：" + str(e))
 
     def comRefresh(self):
         self.comboBox_SerialPortName.clear()
@@ -97,17 +96,24 @@ class mainWindow(QMainWindow, Ui_Form):
         sys.exit(app.exec_())
 
     def systemInterface(self):
-        infoList = self.lineEdit_TargetPosition.text().split(',')
-        targetAngle = int(infoList[0])
-        targetDistance = int(infoList[1])
-        print(targetAngle)
-        figInit = Figure(figsize=(4, 3), dpi=100)
-        self.canvas = FigureCanvas(figInit)
+        fig = Figure(figsize=(4, 3), dpi=100)
+        self.canvas = FigureCanvas(fig)
         self.canvas.setParent(self.graphicsView_SystemDisplay)
-        figInit.add_subplot(111, polar=True).scatter(targetAngle, targetDistance, color='r')
+        ax = fig.add_subplot(111, polar=True)
+        ax.scatter(0, 0, color='r')
+        ax.set_rmax(100)
+        ax.set_autoscale_on(False)
         scene = QGraphicsScene(self)
         scene.addWidget(self.canvas)
         self.graphicsView_SystemDisplay.setScene(scene)
+
+    def updateDisplay(self, targetAngle, targetDistance):
+        self.canvas.figure.clear()
+        ax = self.canvas.figure.add_subplot(111, polar=True)
+        ax.scatter(np.pi * targetAngle / 180, targetDistance, color='r')
+        ax.set_rmax(100)
+        ax.set_autoscale_on(False)
+        self.canvas.draw()
 
 
 if __name__ == "__main__":
