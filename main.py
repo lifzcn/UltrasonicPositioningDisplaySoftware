@@ -47,12 +47,13 @@ class mainWindow(QMainWindow, Ui_Form):
         try:
             rxData = bytes(self.com.readAll())
             self.lineEdit_TargetPosition.setText(rxData.decode("utf-8"))
-            infoList = self.lineEdit_TargetPosition.text().split(',')
+            infoList = rxData.decode("utf-8").split(',')
             targetAngle = int(infoList[0])
             targetDistance = int(infoList[1])
+            self.lineEdit_TargetPosition.setText(infoList[0] + '°' + ',' + infoList[1] + 'm')
             self.updateDisplay(targetAngle, targetDistance)
         except Exception as e:
-            QMessageBox.critical(self, "严重错误", "串口接收数据错误：" + str(e))
+            QMessageBox.critical(self, "严重错误", "串口接收数据错误!\n" + str(e))
 
     def comRefresh(self):
         self.comboBox_SerialPortName.clear()
@@ -72,8 +73,8 @@ class mainWindow(QMainWindow, Ui_Form):
             if self.com.open(QSerialPort.ReadWrite) == False:
                 QMessageBox.critical(self, "严重错误", "串口打开失败!")
                 return
-        except:
-            QMessageBox.critical(self, "严重错误", "串口打开失败!")
+        except Exception as e:
+            QMessageBox.critical(self, "严重错误", "串口打开失败!\n" + str(e))
             return
         self.pushButton_Close.setEnabled(True)
         self.pushButton_Open.setEnabled(False)
