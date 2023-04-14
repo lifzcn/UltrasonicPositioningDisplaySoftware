@@ -49,7 +49,7 @@ class mainWindow(QMainWindow, Ui_Form):
             self.lineEdit_TargetPosition.setText(rxData.decode("utf-8"))
             infoList = rxData.decode("utf-8").split(',')
             targetAngle = int(infoList[0])
-            targetDistance = int(infoList[1])
+            targetDistance = float(infoList[1])
             if targetAngle >= 0 and targetAngle < 45:
                 self.lineEdit_TargetPosition.setText("E→N:" + str(targetAngle) + '°' + ',' + str(targetDistance) + 'm')
             elif targetAngle >= 45 and targetAngle < 90:
