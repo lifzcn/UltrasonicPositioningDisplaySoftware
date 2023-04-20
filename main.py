@@ -112,7 +112,7 @@ class mainWindow(QMainWindow, Ui_Form):
         self.canvas.setParent(self.graphicsView_SystemDisplay)
         ax = fig.add_subplot(111, polar=True)
         ax.scatter(0, 0, color='r')
-        ax.set_rmax(100)
+        ax.set_rmax(50)
         ax.set_autoscale_on(False)
         scene = QGraphicsScene(self)
         scene.addWidget(self.canvas)
@@ -122,7 +122,7 @@ class mainWindow(QMainWindow, Ui_Form):
         self.canvas.figure.clear()
         ax = self.canvas.figure.add_subplot(111, polar=True)
         ax.scatter(np.pi * targetAngle / 180, targetDistance, color='r')
-        ax.set_rmax(100)
+        ax.set_rmax(50)
         ax.set_autoscale_on(False)
         self.canvas.draw()
 
